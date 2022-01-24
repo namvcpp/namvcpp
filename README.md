@@ -1,5 +1,5 @@
 - 👋 Hi, I’m namvcpp.
-- 👀 I’m interested in programming Python, C++, HTML, CSS and Javascript.
+- 👀 I’m interested in programming Python, C++, HTML, CSS, Javascript and Java.
 - 🌱 I’m currently learning HTML, CSS.
 - ✨ I'm a student.
 <!---
