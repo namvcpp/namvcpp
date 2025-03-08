@@ -31,6 +31,6 @@ const nextConfig: NextConfig = {
   }
 };
 
-const withMDX = require('@next/mdx')({});
+const withMDX = createMDX({extension: /\.mdx?$/});
 
 export default withMDX(nextConfig);

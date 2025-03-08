@@ -2,7 +2,6 @@ import React, { ComponentPropsWithoutRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { highlight } from 'sugar-high'
-import { h2 } from 'framer-motion/client';
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>;
 type ParagraphProps = ComponentPropsWithoutRef<'p'>;
