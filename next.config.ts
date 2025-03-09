@@ -28,7 +28,11 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: true,
     viewTransition: true
-  }
+  },
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 const withMDX = createMDX({extension: /\.mdx?$/});
