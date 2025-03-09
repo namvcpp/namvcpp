@@ -207,11 +207,15 @@ table {
 
 .animate-gradient {
   background-size: 200% 200%;
+  padding-bottom: 0.15em;
+  line-height: 1.2;
   animation: gradient 4s ease infinite;
 }
 
 .animate-gradient-slow {
   background-size: 200% 200%;
+  padding-bottom: 0.15em;
+  line-height: 1.2;
   animation: gradient 8s ease infinite;
 }
 
