@@ -30,7 +30,9 @@ const AnimatedCard = ({ title, description, tags, link, featured = false, delay 
         onHoverEnd={() => setHovered(false)}
         whileHover={{ 
           y: -5,
-          boxShadow: '0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          rotateX: 2,
+          rotateY: 2,
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
         }}
       >
         {/* Background gradient that reveals on hover */}

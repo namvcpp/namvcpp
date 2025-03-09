@@ -30,6 +30,7 @@ const ParticleBackground = () => {
       speedX: number;
       speedY: number;
       color: string;
+      z: number;
       
       constructor() {
         this.x = Math.random() * (canvas?.width || window.innerWidth);
@@ -38,6 +39,7 @@ const ParticleBackground = () => {
         this.speedX = Math.random() * 0.5 - 0.25;
         this.speedY = Math.random() * 0.5 - 0.25;
         this.color = `rgba(59, 130, 246, ${Math.random() * 0.3 + 0.1})`;
+        this.z = Math.random() * 3;
       }
       
       update() {
@@ -55,9 +57,10 @@ const ParticleBackground = () => {
       
       draw() {
         if (!ctx) return;
-        ctx.fillStyle = this.color;
+        ctx.globalAlpha = 0.6 / this.z;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 1 + this.z * 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
         ctx.fill();
       }
     }
