@@ -2,20 +2,28 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 async function getNoteSlugs(dir: string) {
-  const entries = await fs.readdir(dir, {
-    recursive: true,
-    withFileTypes: true,
-  });
-  return entries
-    .filter((entry) => entry.isFile() && entry.name === 'page.mdx')
-    .map((entry) => {
-      const relativePath = path.relative(
-        dir,
-        path.join(entry.parentPath, entry.name)
-      );
-      return path.dirname(relativePath);
-    })
-    .map((slug) => slug.replace(/\\/g, '/'));
+  try {
+    const entries = await fs.readdir(dir, {
+      recursive: true,
+      withFileTypes: true,
+    });
+    return entries
+      .filter((entry) => entry.isFile() && entry.name === 'page.mdx')
+      .map((entry) => {
+        const relativePath = path.relative(
+          dir,
+          path.join(entry.parentPath, entry.name)
+        );
+        return path.dirname(relativePath);
+      })
+      .map((slug) => slug.replace(/\\/g, '/'));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      // Directory does not exist, return an empty array
+      return [];
+    }
+    throw error;
+  }
 }
 
 export default async function sitemap() {
