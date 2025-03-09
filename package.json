@@ -10,14 +10,18 @@
   },
   "dependencies": {
     "@next/mdx": "^15.2.1",
+    "@types/aos": "^3.0.7",
     "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^1.5.0",
+    "aos": "^2.3.4",
     "framer-motion": "^12.4.10",
+    "gsap": "^3.12.7",
     "next": "15.2.1",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0",
     "sugar-high": "^0.9.3"
   },
   "devDependencies": {

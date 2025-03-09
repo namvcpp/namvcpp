@@ -197,3 +197,55 @@ table {
     opacity: 0;
   }
 }
+
+/* Add these animation classes */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 4s ease infinite;
+}
+
+.animate-gradient-slow {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+/* For nice text animations */
+.animate-text-reveal {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.animate-text-reveal span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: textReveal 0.8s forwards;
+}
+
+@keyframes textReveal {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Subtle hover effect for links */
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Animated background pattern */
+.animated-pattern {
+  background-color: transparent;
+  background-image: radial-gradient(#3b82f6 0.5px, transparent 0.5px);
+  background-size: 15px 15px;
+  opacity: 0.2;
+}

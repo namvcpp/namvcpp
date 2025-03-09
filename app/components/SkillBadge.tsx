@@ -1,11 +1,14 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface SkillBadgeProps {
   name: string;
   level?: 'beginner' | 'intermediate' | 'advanced' | 'expert';
 }
 
-export default function SkillBadge({ name, level }: SkillBadgeProps) {
+const SkillBadge = ({ name, level }: SkillBadgeProps) => {
   const getLevelClass = () => {
     switch(level) {
       case 'beginner': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
@@ -17,11 +20,20 @@ export default function SkillBadge({ name, level }: SkillBadgeProps) {
   };
   
   return (
-    <div className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium mr-2 mb-2 ${getLevelClass()}`}>
+    <motion.div 
+      className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium mr-2 mb-2 ${getLevelClass()}`}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.97 }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+    >
       {name}
       {level && (
-        <span className="ml-2 w-2 h-2 rounded-full bg-current"></span>
+        <span className="ml-2 w-2 h-2 rounded-full bg-current animate-pulse"></span>
       )}
-    </div>
+    </motion.div>
   );
-}
+};
+
+export default SkillBadge;
