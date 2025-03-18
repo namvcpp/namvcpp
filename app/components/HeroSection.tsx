@@ -7,7 +7,7 @@ import { MdEmail } from 'react-icons/md';
 import Image from 'next/image';
 
 const HeroSection = () => {
-  // Text animation variants
+  // Enhanced animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -28,13 +28,42 @@ const HeroSection = () => {
     }
   };
   
+  // Background blobs animation
+  const blobVariants = {
+    initial: { scale: 0.8, opacity: 0.4 },
+    animate: {
+      scale: 1.2, 
+      opacity: 0.8,
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        repeatType: "reverse" as const
+      }
+    }
+  };
+  
   return (
-    <section className="flex flex-col-reverse md:flex-row items-center md:items-start gap-8 relative mb-24">
-      {/* Decorative elements */}
-      <div className="absolute -z-10 w-full h-full">
-        <div className="absolute top-10 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-400/10 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDelay: '1s', animationDuration: '5s' }}></div>
+    <motion.section 
+      className="flex flex-col-reverse md:flex-row items-center md:items-start gap-8 relative mb-24"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Enhanced decorative elements */}
+      <div className="absolute -z-10 w-full h-full overflow-hidden">
+        <motion.div 
+          className="absolute top-10 left-1/4 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"
+          variants={blobVariants}
+          initial="initial"
+          animate="animate"
+        ></motion.div>
+        <motion.div 
+          className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-400/10 rounded-full blur-3xl"
+          variants={blobVariants}
+          initial="initial"
+          animate="animate"
+          style={{ animationDelay: '1s' }}
+        ></motion.div>
       </div>
       
       <motion.div 
@@ -62,7 +91,7 @@ const HeroSection = () => {
           className="flex gap-4 pt-4"
           variants={itemVariants}
         >
-          {/* Social icons with hover effects */}
+          {/* Enhanced social icons with hover effects */}
           <SocialLink href="https://github.com/namvcpp" icon={<FaGithub size={24} />} label="GitHub" />
           <SocialLink href="https://www.linkedin.com/in/nam-van-b33752347/" icon={<FaLinkedinIn size={24} />} label="LinkedIn" />
           <SocialLink href="mailto:namvc153@gmail.com" icon={<MdEmail size={24} />} label="Email" />
@@ -73,7 +102,12 @@ const HeroSection = () => {
         className="w-32 h-32 md:w-40 md:h-40 relative overflow-hidden rounded-full ring-4 ring-blue-500/50 dark:ring-blue-400/50 flex-shrink-0 shadow-lg"
         initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ type: "spring", damping: 15, stiffness: 100, duration: 1 }}
+        transition={{ 
+          type: "spring", 
+          damping: 15, 
+          stiffness: 100, 
+          duration: 1 
+        }}
         whileHover={{ 
           scale: 1.05, 
           boxShadow: "0 0 25px rgba(59, 130, 246, 0.5)",
@@ -81,7 +115,8 @@ const HeroSection = () => {
         }}
       >
         <div className="w-full h-full bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 animate-gradient-slow"></div>
-        {/* If you have an image, use this instead:
+        {/* If you have an image, use this instead: */}
+        {/* 
         <Image
           src="/profile.jpg"
           alt="Nam Van"
@@ -91,24 +126,22 @@ const HeroSection = () => {
         />
         */}
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 
-// Sub-component for social links
-interface SocialLinkProps {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-}
-
-const SocialLink = ({ href, icon, label }: SocialLinkProps) => (
+// Enhanced social link component with more elaborate animations
+const SocialLink = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
   <motion.a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="p-2 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-    whileHover={{ scale: 1.2, rotate: 5 }}
+    className="p-3 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors bg-gray-100 dark:bg-gray-800 rounded-full"
+    whileHover={{ 
+      scale: 1.2, 
+      rotate: 5, 
+      backgroundColor: "rgba(59, 130, 246, 0.1)",
+    }}
     whileTap={{ scale: 0.9 }}
   >
     {icon}

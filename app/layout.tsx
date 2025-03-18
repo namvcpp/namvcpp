@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PageTransition from './components/PageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,7 +32,9 @@ export default function RootLayout({
         <Navbar />
         <div className="min-h-screen flex flex-col justify-between pt-16 p-8 dark:bg-zinc-800 bg-white text-gray-900 dark:text-zinc-200">
           <main className="max-w-6xl mx-auto w-full">
-            <ViewTransition name="test">{children}</ViewTransition>
+            <PageTransition>
+              <ViewTransition name="test">{children}</ViewTransition>
+            </PageTransition>
           </main>
           <Footer />
           <Analytics />
