@@ -375,11 +375,28 @@ const Card = ({ children, index, hoveredCard, setHoveredCard, springX, springY, 
   const cardX = useMotionValue(0);
   const cardY = useMotionValue(0);
   
-  // Transform values for the rotation
-  const rotateX = useTransform(cardY, [-300, 300], [10, -10]);
-  const rotateY = useTransform(cardX, [-300, 300], [-10, 10]);
+  // More dramatic rotation for enhanced 3D effect
+  const rotateX = useTransform(cardY, [-300, 300], [15, -15]);
+  const rotateY = useTransform(cardX, [-300, 300], [-15, 15]);
+  
+  // Add z-translation for depth effect
+  const z = useTransform(
+    cardX, 
+    [-300, 0, 300], 
+    [10, 0, 10]
+  );
 
-  // Update card position values based on mouse position
+  // Dynamic shadow and border lighting effects
+  const isHovered = hoveredCard === index;
+  const shadowOpacity = useMotionValue(0);
+  const borderGlow = useMotionValue(0);
+  
+  useEffect(() => {
+    shadowOpacity.set(isHovered ? 0.7 : 0);
+    borderGlow.set(isHovered ? 1 : 0);
+  }, [isHovered, shadowOpacity, borderGlow]);
+
+  // Update card position values based on mouse position with improved precision
   useEffect(() => {
     const updateCardPosition = () => {
       if (!cardRef.current) return;
@@ -388,12 +405,14 @@ const Card = ({ children, index, hoveredCard, setHoveredCard, springX, springY, 
       const cardCenterX = rect.left + rect.width / 2;
       const cardCenterY = rect.top + rect.height / 2;
       
-      // Calculate distance from mouse to card center
+      // Calculate distance from mouse to card center with sensitivity adjustment
       const mouseX = springX.get();
       const mouseY = springY.get();
       
-      cardX.set(mouseX - cardCenterX);
-      cardY.set(mouseY - cardCenterY);
+      // Adjust sensitivity for more natural motion
+      const sensitivity = 1.25;
+      cardX.set((mouseX - cardCenterX) * sensitivity);
+      cardY.set((mouseY - cardCenterY) * sensitivity);
     };
     
     const unsubscribeX = springX.onChange(updateCardPosition);
@@ -405,28 +424,30 @@ const Card = ({ children, index, hoveredCard, setHoveredCard, springX, springY, 
     };
   }, [springX, springY, cardX, cardY]);
 
-  // Get the glow color based on prop
+  // Get the glow color based on prop with enhanced opacity and spread
   const getGlowColor = () => {
     switch (glowColor) {
-      case "blue": return "dark:hover:shadow-blue-500/[0.2]";
-      case "green": return "dark:hover:shadow-green-500/[0.2]";
-      case "purple": return "dark:hover:shadow-purple-500/[0.2]";
-      default: return "dark:hover:shadow-blue-500/[0.1]";
+      case "blue": return "dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]";
+      case "green": return "dark:hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]";
+      case "purple": return "dark:hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]";
+      default: return "dark:hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]";
     }
   };
   
+  // Get border glow color
+  const getBorderGlowColor = () => {
+    switch (glowColor) {
+      case "blue": return "rgba(59, 130, 246, 0.6)";
+      case "green": return "rgba(16, 185, 129, 0.6)";
+      case "purple": return "rgba(139, 92, 246, 0.6)";
+      default: return "rgba(59, 130, 246, 0.4)";
+    }
+  };
+
   return (
     <motion.div 
       ref={cardRef}
-      className={`bg-white dark:bg-gray-800 rounded-xl p-6 border border-black/[0.1] dark:border-white/[0.2] shadow-sm hover:shadow-xl ${getGlowColor()} transition-all duration-300 [transform-style:preserve-3d] ${className}`}
-      style={{
-        rotateX: hoveredCard === index ? rotateX : 0,
-        rotateY: hoveredCard === index ? rotateY : 0,
-        z: hoveredCard === index ? 10 : 0
-      }}
-      onMouseEnter={() => setHoveredCard(index)}
-      onMouseLeave={() => setHoveredCard(null)}
-      whileHover={{ scale: 1.02 }}
+      className={`relative group perspective-1000 ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
@@ -435,17 +456,79 @@ const Card = ({ children, index, hoveredCard, setHoveredCard, springX, springY, 
         delay: index * 0.1 + 0.2 
       }}
     >
-      {/* Glow effect */}
-      <motion.div 
-        className="absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none"
+      {/* Card shadow for depth */}
+      <motion.div
+        className="absolute inset-0 rounded-xl bg-black/10 dark:bg-black/30 blur-xl"
         style={{
-          background: `radial-gradient(circle at ${cardX.get()}px ${cardY.get()}px, rgba(255,255,255,0.1) 0%, transparent 70%)`
+          scale: isHovered ? 0.96 : 0.9,
+          opacity: shadowOpacity,
+          translateY: 15
         }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
       />
       
-      {/* Content */}
-      <motion.div className="relative z-10">
-        {children}
+      {/* Primary card */}
+      <motion.div 
+        className={`bg-white dark:bg-gray-800 rounded-xl p-6 border border-black/[0.1] dark:border-white/[0.1] shadow-sm backdrop-blur-sm ${getGlowColor()} transition-shadow duration-300 [transform-style:preserve-3d] w-full overflow-hidden`}
+        style={{
+          rotateX: isHovered ? rotateX : 0,
+          rotateY: isHovered ? rotateY : 0,
+          z: isHovered ? z : 0,
+          translateZ: 0,
+          boxShadow: isHovered ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' : '0 0 0 rgba(0, 0, 0, 0)'
+        }}
+        onMouseEnter={() => setHoveredCard(index)}
+        onMouseLeave={() => setHoveredCard(null)}
+        whileHover={{ scale: 1.02 }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 400, 
+          damping: 25 
+        }}
+      >
+        {/* Background gradient that moves with the card tilt */}
+        <motion.div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at ${cardX.get()}px ${cardY.get()}px, 
+              rgba(255, 255, 255, 0.2) 0%, 
+              transparent 50%)`,
+            zIndex: 0
+          }}
+        />
+        
+        {/* Animated border glow effect */}
+        <motion.div 
+          className="absolute inset-0 rounded-xl pointer-events-none"
+          style={{
+            boxShadow: `inset 0 0 0 1px ${getBorderGlowColor()}`,
+            opacity: borderGlow
+          }}
+          transition={{ type: "spring", stiffness: 500 }}
+        />
+        
+        {/* Dynamic shine effect */}
+        <motion.div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
+          style={{
+            background: `linear-gradient(105deg, 
+              transparent 20%, 
+              rgba(255, 255, 255, 0.1) 30%, 
+              rgba(255, 255, 255, 0.1) 32%, 
+              transparent 40%)`,
+            backgroundSize: "200% 200%",
+            backgroundPosition: isHovered ? "right" : "left",
+          }}
+          transition={{ 
+            duration: 1,
+            ease: "easeInOut"
+          }}
+        />
+        
+        {/* Content with lifted z-index */}
+        <motion.div className="relative z-10">
+          {children}
+        </motion.div>
       </motion.div>
     </motion.div>
   );
