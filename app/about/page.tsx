@@ -10,10 +10,10 @@ import AwardItem from '../components/AwardItem';
 
 const AboutPage = () => {
   const skills = [
-    { name: 'Web Development', icon: <FaLaptopCode className="w-6 h-6" />, level: 90 },
-    { name: 'Backend Systems', icon: <FaServer className="w-6 h-6" />, level: 85 },
-    { name: 'Mobile Apps', icon: <FaMobileAlt className="w-6 h-6" />, level: 75 },
-    { name: 'Machine Learning', icon: <FaBrain className="w-6 h-6" />, level: 80 },
+    { name: 'Web Development', icon: <FaLaptopCode className="w-6 h-6" /> },
+    { name: 'Backend Systems', icon: <FaServer className="w-6 h-6" /> },
+    { name: 'Mobile Apps', icon: <FaMobileAlt className="w-6 h-6" /> },
+    { name: 'Machine Learning', icon: <FaBrain className="w-6 h-6" /> },
   ];
 
   const achievements = [
@@ -74,12 +74,6 @@ const AboutPage = () => {
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
                 {skill.name}
               </h3>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-2">
-                <motion.div className="bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" initial={{ width: 0 }} animate={{ width: `${skill.level}%` }} transition={{ delay: 0.7 + index * 0.1, duration: 1, ease: "easeOut" }} />
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {skill.level}% Proficiency
-              </p>
             </div>
           ))}
         </div>
