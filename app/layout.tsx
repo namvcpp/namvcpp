@@ -1,25 +1,9 @@
 import './globals.css';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
-import { unstable_ViewTransition as ViewTransition } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import PageTransition from './components/PageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://namvcpp.com'),
-  alternates: {
-    canonical: '/'
-  },
-  title: {
-    default: 'Nam Van',
-    template: '%s | Nam Van'
-  },
-  description: 'Developer, writer, and creator.',
-};
 
 export default function RootLayout({
   children
@@ -32,12 +16,9 @@ export default function RootLayout({
         <Navbar />
         <div className="min-h-screen flex flex-col justify-between pt-16 p-8 dark:bg-zinc-800 bg-white text-gray-900 dark:text-zinc-200">
           <main className="max-w-6xl mx-auto w-full">
-            <PageTransition>
-              <ViewTransition name="test">{children}</ViewTransition>
-            </PageTransition>
+            {children}
           </main>
           <Footer />
-          <Analytics />
         </div>
       </body>
     </html>
