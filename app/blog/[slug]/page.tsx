@@ -1,35 +1,49 @@
-import { getBlogPosts, BlogPost } from '../../lib/getBlogPosts';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
+import { getBlogPosts } from '../../lib/getBlogPosts';
 import path from 'path';
 import { promises as fs } from 'fs';
 import matter from 'gray-matter';
-import { Metadata } from 'next';
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+// Define the BlogPost interface
+interface BlogPost {
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  image: string;
+  tags: string[];
 }
 
-// Generate metadata for each blog post
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = (await getBlogPosts()).find(post => post.slug === params.slug);
   
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Blog Post Not Found'
     };
   }
   
   return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: {
-      images: [post.image],
-    },
+    title: `${post.title} | Your Name`,
+    description: post.excerpt
   };
+}
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 // Fetch a single blog post by slug
@@ -60,41 +74,62 @@ async function getPostContent(slug: string): Promise<string> {
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug);
-  const content = await getPostContent(params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const posts = await getBlogPosts();
+  const post = posts.find(post => post.slug === params.slug);
   
   if (!post) {
     notFound();
   }
   
-  // You'll need to render the markdown content with a library like react-markdown
-  // For now, just displaying basic info
   return (
-    <article className="prose prose-lg dark:prose-invert max-w-3xl mx-auto">
-      <h1>{post.title}</h1>
-      <div className="flex items-center text-gray-500 dark:text-gray-400 gap-4 mb-8">
-        <time>{post.date}</time>
-        <span>{post.readTime}</span>
+    <main className="container mx-auto px-4 py-12">
+      <div className="max-w-3xl mx-auto">
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-8"
+        >
+          <ArrowLeft size={16} className="mr-2" /> Back to all posts
+        </Link>
+        
+        <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8">
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
+        
+        <div className="mb-6">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {post.tags.map(tag => (
+              <span 
+                key={tag}
+                className="px-2 py-1 text-xs rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-2">
+            {post.title}
+          </h1>
+          
+          <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-sm mb-8">
+            <span>{post.date}</span>
+            <span>{post.readTime}</span>
+          </div>
+        </div>
+        
+        {/* This would be replaced with your actual blog content rendering */}
+        <article className="prose dark:prose-invert max-w-none">
+          {/* Your blog content will be rendered here */}
+          <p>Your blog post content would appear here. You'll need to implement the MDX or markdown rendering.</p>
+        </article>
       </div>
-      
-      {/* Render image */}
-      <div className="relative w-full h-64 md:h-96 mb-8">
-        <img 
-          src={post.image} 
-          alt={post.title}
-          className="object-cover w-full h-full rounded-lg"
-        />
-      </div>
-      
-      {/* We'll need to add markdown rendering here */}
-      <div className="mt-8">
-        {content ? (
-          <pre className="whitespace-pre-wrap">{content}</pre>
-        ) : (
-          <p className="text-gray-500">No content available</p>
-        )}
-      </div>
-    </article>
+    </main>
   );
 }

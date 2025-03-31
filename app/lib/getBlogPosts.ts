@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
@@ -10,51 +10,50 @@ export interface BlogPost {
   image: string;
   readTime: string;
   tags: string[];
+  content?: string; // Add content field for full blog post
 }
 
+const wordsPerMinute = 200;
+const postsDirectory = path.join(process.cwd(), 'content', 'blog');
+
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  const blogsDirectory = path.join(process.cwd(), 'app', 'blog');
-  
   try {
-    const entries = await fs.readdir(blogsDirectory, {
-      recursive: true,
-      withFileTypes: true,
-    });
-    
-    const blogFiles = entries
-      .filter(entry => entry.isFile() && (entry.name === 'page.mdx' || entry.name === 'page.md'))
-      .map(entry => {
-        return path.join(entry.path, entry.name);
-      });
+    // Check if directory exists
+    if (!fs.existsSync(postsDirectory)) {
+      console.warn(`Blog posts directory not found: ${postsDirectory}`);
+      return [];
+    }
+
+    const fileNames = fs.readdirSync(postsDirectory);
     
     const blogPosts = await Promise.all(
-      blogFiles.map(async (filePath) => {
-        const fileContents = await fs.readFile(filePath, 'utf8');
-        const { data, content } = matter(fileContents);
+      fileNames
+        .filter(fileName => fileName.endsWith('.md') || fileName.endsWith('.mdx'))
+        .map(async fileName => {
+          const slug = fileName.replace(/\.mdx?$/, '');
+          const fullPath = path.join(postsDirectory, fileName);
+          const fileContents = fs.readFileSync(fullPath, 'utf8');
+          
+          const { data, content } = matter(fileContents);
+          
+          const wordCount = content.split(/\s+/g).length;
+          const readTime = Math.ceil(wordCount / wordsPerMinute);
         
-        // Extract slug from file path
-        const relativePath = path.relative(blogsDirectory, filePath);
-        const slug = path.dirname(relativePath).replace(/\\/g, '/');
-        
-        // Calculate read time (approx 200 words per minute)
-        const wordsPerMinute = 200;
-        const wordCount = content.split(/\s+/g).length;
-        const readTime = Math.ceil(wordCount / wordsPerMinute);
-        
-        return {
-          slug,
-          title: data.title || 'Untitled Post',
-          excerpt: data.excerpt || content.substring(0, 150) + '...',
-          date: data.date ? new Date(data.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          }) : 'No date',
-          image: data.image || '/images/blog/default.jpg',
-          readTime: `${readTime} min read`,
-          tags: data.tags || [],
-        };
-      })
+          return {
+            slug,
+            title: data.title || 'Untitled Post',
+            excerpt: data.excerpt || content.substring(0, 150) + '...',
+            date: data.date ? new Date(data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            }) : 'No date',
+            image: data.image || '/images/blog/default.jpg',
+            readTime: `${readTime} min read`,
+            tags: data.tags || [],
+            content: content, // Include full content
+          };
+        })
     );
     
     // Sort by date (newest first)
@@ -65,4 +64,10 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     console.error('Error fetching blog posts:', error);
     return [];
   }
+}
+
+// Add a function to get a single post by slug
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  const posts = await getBlogPosts();
+  return posts.find(post => post.slug === slug) || null;
 }
