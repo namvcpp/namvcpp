@@ -113,7 +113,7 @@ const Footer = () => {
         </div>
         <div className="border-t border-gray-200 dark:border-gray-700 pt-6 pb-8 text-center">
           <p className="text-gray-600 dark:text-gray-400 text-sm">
-            © {currentYear} Nam Vu. All rights reserved. Built with <FaHeart className="inline text-red-500 mx-1" /> using Next.js.
+            © {currentYear} Nam Van. All rights reserved. Built with <FaHeart className="inline text-red-500 mx-1" /> using Next.js.
           </p>
         </div>
       </div>
