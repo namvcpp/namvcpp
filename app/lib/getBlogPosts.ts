@@ -14,7 +14,7 @@ export interface BlogPost {
 }
 
 const wordsPerMinute = 200;
-const postsDirectory = path.join(process.cwd(), 'content', 'blog');
+const postsDirectory = path.join(process.cwd(), 'blog');
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {

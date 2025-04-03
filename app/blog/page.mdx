@@ -1,0 +1,61 @@
+import OverviewCard from '../components/OverviewCard';
+
+export const metadata = {
+  title: 'Blogs | My Website',
+  description: 'Explore our collection of insightful blogs on various topics.',
+};
+
+# Blogs
+
+Welcome to our blog section! Explore our latest posts below:
+
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <OverviewCard 
+    title="Understanding Calculus" 
+    description="Dive into the fundamentals of calculus and its applications." 
+    icon={<span>📘</span>} 
+    onClick={() => window.location.href = '/blog/understanding-calculus'}
+  />
+  <OverviewCard 
+    title="The Beauty of Differential Equations" 
+    description="Discover how differential equations shape the world around us." 
+    icon={<span>📗</span>} 
+    onClick={() => window.location.href = '/blog/differential-equations'}
+  />
+  <OverviewCard 
+    title="Linear Algebra in Action" 
+    description="Learn how linear algebra powers modern technology." 
+    icon={<span>📙</span>} 
+    onClick={() => window.location.href = '/blog/linear-algebra'}
+  />
+  <OverviewCard 
+    title="Exploring Probability" 
+    description="Uncover the mysteries of probability and its real-world uses." 
+    icon={<span>🎲</span>} 
+    onClick={() => window.location.href = '/blog/exploring-probability'}
+  />
+  <OverviewCard 
+    title="The Essence of Geometry" 
+    description="Understand the core principles of geometry and its beauty." 
+    icon={<span>📐</span>} 
+    onClick={() => window.location.href = '/blog/essence-of-geometry'}
+  />
+  <OverviewCard 
+    title="Machine Learning Basics" 
+    description="An introduction to the concepts driving machine learning." 
+    icon={<span>🤖</span>} 
+    onClick={() => window.location.href = '/blog/machine-learning-basics'}
+  />
+  <OverviewCard 
+    title="The Power of Algorithms" 
+    description="Explore how algorithms solve complex problems efficiently." 
+    icon={<span>⚙️</span>} 
+    onClick={() => window.location.href = '/blog/power-of-algorithms'}
+  />
+  <OverviewCard 
+    title="Cryptography Demystified" 
+    description="Learn how cryptography secures our digital world." 
+    icon={<span>🔒</span>} 
+    onClick={() => window.location.href = '/blog/cryptography-demystified'}
+  />
+</div>

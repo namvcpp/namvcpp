@@ -13,12 +13,6 @@ const Projects = () => {
             A brief description of your first project. Highlight its purpose and technologies used.
           </p>
         </li>
-        <li>
-          <h2 className="text-xl font-semibold">Project 2</h2>
-          <p className="text-gray-700 dark:text-gray-300">
-            A brief description of your second project. Highlight its purpose and technologies used.
-          </p>
-        </li>
       </ul>
     </div>
   );

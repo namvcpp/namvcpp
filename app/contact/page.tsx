@@ -4,16 +4,43 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold mb-6">Contact Me</h1>
-      <p className="text-gray-700 dark:text-gray-300 mb-4">
-        Feel free to reach out to me through any of the following channels:
-      </p>
-      <ul className="space-y-2">
-        <li>Email: <a href="mailto:namvan@example.com" className="text-blue-500 hover:underline">namvan@example.com</a></li>
-        <li>Twitter: <a href="https://twitter.com/namvcpp" className="text-blue-500 hover:underline">@namvcpp</a></li>
-        <li>GitHub: <a href="https://github.com/namvcpp" className="text-blue-500 hover:underline">github.com/namvcpp</a></li>
-      </ul>
+    <div className="min-h-screen p-8 bg-blue-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-2xl shadow-xl">
+      <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
+      <form className="space-y-4">
+        <div>
+          <label htmlFor="name" className="block text-lg font-medium mb-2">Name</label>
+          <input
+            type="text"
+            id="name"
+            className="w-full px-4 py-2 border rounded-lg"
+            placeholder="Your Name"
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="block text-lg font-medium mb-2">Email</label>
+          <input
+            type="email"
+            id="email"
+            className="w-full px-4 py-2 border rounded-lg"
+            placeholder="Your Email"
+          />
+        </div>
+        <div>
+          <label htmlFor="message" className="block text-lg font-medium mb-2">Message</label>
+          <textarea
+            id="message"
+            className="w-full px-4 py-2 border rounded-lg"
+            placeholder="Your Message"
+            rows={4}
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600"
+        >
+          Send Message
+        </button>
+      </form>
     </div>
   );
 };
