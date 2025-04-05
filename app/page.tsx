@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { FaGithub, FaLinkedinIn, FaArrowRight } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -23,154 +22,125 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Navbar />
-      
-      <div className="max-w-4xl mx-auto px-4 py-16 space-y-24">
-        {/* Hero Section */}
-        <section className="flex flex-col-reverse md:flex-row items-center md:items-start gap-8">
-          <div className="flex-1 space-y-4">
-            <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+    <main className="container mx-auto px-4 py-16">
+      {/* Hero Section */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="space-y-5">
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-gray-50">
+            Hi, I'm Nam Van 👋
+          </h1>
+          <p className="text-xl text-gray-800 dark:text-gray-300">
+            A high school student passionate about software development, IoT, and AI.
+            Currently focusing on innovative solutions using machine learning and web technologies.
+          </p>
+          <div className="flex space-x-4">
+            <a 
+              href="https://github.com/namvcpp" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
             >
-              Hey, I'm Nam Van 👋
-            </motion.h1>
-            
-            <motion.p 
-              className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              <FaGithub size={32} />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/namvcpp/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
             >
-              A high school student passionate about software development, IoT, and AI.
-              Currently focusing on innovative solutions using machine learning and web technologies.
-            </motion.p>
-            
-            <motion.div 
-              className="flex gap-4 pt-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <motion.a 
-                href="https://github.com/namvcpp" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaGithub size={24} />
-                <span className="sr-only">GitHub</span>
-              </motion.a>
-              <motion.a 
-                href="https://linkedin.com/in/namvcpp" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaLinkedinIn size={24} />
-                <span className="sr-only">LinkedIn</span>
-              </motion.a>
-            </motion.div>
+              <FaLinkedinIn size={32} />
+            </a>
           </div>
-          
-          <motion.div 
-            className="w-32 h-32 md:w-40 md:h-40 relative overflow-hidden rounded-full ring-4 ring-blue-500 dark:ring-blue-400 flex-shrink-0"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", stiffness: 100, duration: 0.8 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(59, 130, 246, 0.5)" }}
+        </div>
+        <div className="rounded-2xl overflow-hidden shadow-xl">
+          <img 
+            src="/images/profile.jpg" // Replace with your image
+            alt="Nam Van" 
+            className="w-full h-auto object-cover" 
+          />
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="mt-16">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">
+            Featured Projects
+          </h2>
+          <Link 
+            href="/projects" 
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
           >
-            <div className="w-full h-full bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 animate-gradient-slow"></div>
-          </motion.div>
-        </section>
-        
-        {/* Featured Projects Section */}
-        <section>
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Featured Projects</h2>
-            <Link href="/projects" className="group flex items-center text-blue-600 dark:text-blue-400 hover:underline">
-              View all 
-              <FaArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <AnimatedCard
-              title="Landslide Detection System"
-              description="Early warning system combining IoT sensors with real-time alerting for potential landslides."
-              tags={["IoT", "ESP32", "React", "Firebase"]}
-              link="/projects/landslide-detection"
-              featured
-            />
-            
-            <AnimatedCard
-              title="Elderly HealthCare"
-              description="Fall detection system using computer vision to detect falls and alert caregivers in real-time."
-              tags={["Python", "OpenCV", "TensorFlow", "ML"]}
-              link="/projects/elderly-healthcare"
-            />
-          </div>
-        </section>
-        
-        {/* Awards & Recognition */}
-        <section>
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Awards</h2>
-            <Link href="/awards" className="group flex items-center text-blue-600 dark:text-blue-400 hover:underline">
-              View all 
-              <FaArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-          
-          <div className="space-y-4">
-            <AwardItem 
-              award="1st Prize - U-Invent Vietnam Season 7"
-              year="2024"
-              description="National innovation competition for students"
-            />
-            
-            <AwardItem 
-              award="2nd Prize - Google Developer Student Club Hackathon"
-              year="2024"
-              description="Nationwide hackathon organized by GDSC"
-            />
-            
-            <AwardItem 
-              award="1st Prize - Youth On! Hackathon"
-              year="2023"
-              description="Regional hackathon for innovative solutions"
-            />
-          </div>
-        </section>
-        
-        {/* About Section */}
-        <section>
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">About</h2>
-            <Link href="/about" className="group flex items-center text-blue-600 dark:text-blue-400 hover:underline">
-              More about me 
-              <FaArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-          
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <p>
-              I'm currently a student at Le Quy Don High School for the Gifted in Da Nang, Vietnam, specializing in Information Technology. 
-              My passion lies in creating technology that solves real-world problems, particularly in healthcare and environmental monitoring.
-            </p>
-            <p>
-              When I'm not coding, you can find me exploring new technologies, participating in hackathons, or contributing to community projects.
-            </p>
-          </div>
-        </section>
-      </div>
-    </>
+            View All <FaArrowRight className="ml-2" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <AnimatedCard
+            title="Landslide Detection System"
+            description="Early warning system combining IoT sensors with real-time alerting for potential landslides."
+            tags={["IoT", "ESP32", "React", "Firebase"]}
+            link="/projects/landslide-detection"
+            featured
+          />
+          <AnimatedCard
+            title="Elderly HealthCare"
+            description="Fall detection system using computer vision to detect falls and alert caregivers in real-time."
+            tags={["Python", "OpenCV", "TensorFlow", "ML"]}
+            link="/projects/elderly-healthcare"
+          />
+        </div>
+      </section>
+
+      {/* Awards & Recognition */}
+      <section className="mt-16">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">
+            Awards & Recognition
+          </h2>
+          <Link 
+            href="/awards" 
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            View All <FaArrowRight className="ml-2" />
+          </Link>
+        </div>
+        <div className="space-y-6">
+          <AwardItem 
+            award="1st Prize - U-Invent Vietnam Season 7"
+            year="2024"
+            description="National innovation competition for students"
+          />
+          <AwardItem 
+            award="2nd Prize - Google Developer Student Club Hackathon"
+            year="2024"
+            description="Nationwide hackathon organized by GDSC"
+          />
+          <AwardItem 
+            award="1st Prize - Youth On! Hackathon"
+            year="2023"
+            description="Regional hackathon for innovative solutions"
+          />
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="mt-16">
+        <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-50 mb-4 text-center">
+          About Me
+        </h2>
+        <p className="text-lg text-gray-800 dark:text-gray-300 max-w-3xl mx-auto text-center">
+          I'm a student developer passionate about building technology that makes a difference. 
+          My focus lies in creating innovative solutions using cutting-edge technologies like IoT, AI, and web development.
+        </p>
+        <div className="text-center mt-6">
+          <Link 
+            href="/about" 
+            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-all"
+          >
+            Learn More About Me
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

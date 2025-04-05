@@ -12,55 +12,55 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 const components = {
     h1: (props: HeadingProps) => (
         <h1 
-            className="text-5xl font-extrabold pt-16 pb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400" 
+            className="text-4xl font-extrabold pt-12 pb-4 text-gray-800 dark:text-gray-100" 
             {...props} 
         />
     ),
     h2: (props: HeadingProps) => (
         <h2 
-            className="text-3xl font-bold mt-12 mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100" 
+            className="text-3xl font-bold mt-10 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100" 
             {...props} 
         />
     ),
     h3: (props: HeadingProps) => (
         <h3 
-            className="text-2xl font-bold mt-8 mb-4 text-gray-700 dark:text-gray-200 relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:h-full before:w-1 before:bg-blue-500 dark:before:bg-blue-400 before:rounded-full" 
+            className="text-2xl font-semibold mt-6 mb-3 text-gray-700 dark:text-gray-200" 
             {...props} 
         />
     ),
     h4: (props: HeadingProps) => (
         <h4 
-            className="text-xl font-semibold mt-6 mb-3 text-gray-700 dark:text-gray-300" 
+            className="text-xl font-semibold mt-4 mb-2 text-gray-700 dark:text-gray-300" 
             {...props} 
         />
     ),
     h5: (props: HeadingProps) => (
         <h5 
-            className="text-lg font-semibold mt-4 mb-2 text-gray-700 dark:text-gray-300" 
+            className="text-lg font-semibold mt-3 mb-2 text-gray-700 dark:text-gray-300" 
             {...props} 
         />
     ),
     h6: (props: HeadingProps) => (
         <h6 
-            className="text-base font-semibold mt-3 mb-2 text-gray-700 dark:text-gray-300" 
+            className="text-base font-semibold mt-2 mb-1 text-gray-700 dark:text-gray-300" 
             {...props} 
         />
     ),
     p: (props: ParagraphProps) => (
         <p 
-            className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6 font-light" 
+            className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-4 font-light" 
             {...props} 
         />
     ),
     ol: (props: ListProps) => (
         <ol 
-            className="list-decimal pl-8 my-6 space-y-3 text-gray-600 dark:text-gray-300 marker:text-blue-500 dark:marker:text-blue-400" 
+            className="list-decimal pl-6 my-4 space-y-2 text-gray-600 dark:text-gray-300 marker:text-blue-500 dark:marker:text-blue-400" 
             {...props} 
         />
     ),
     ul: (props: ListProps) => (
         <ul 
-            className="pl-8 my-6 space-y-3 text-gray-600 dark:text-gray-300 list-none" 
+            className="pl-6 my-4 space-y-2 text-gray-600 dark:text-gray-300 list-none" 
             {...props} 
         />
     ),
@@ -124,7 +124,7 @@ const components = {
     },
     pre: (props: ComponentPropsWithoutRef<'pre'>) => (
         <pre 
-            className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-x-auto my-6 border border-gray-200 dark:border-gray-700 shadow-md relative group" 
+            className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-x-auto my-4 border border-gray-200 dark:border-gray-700 shadow-md relative group" 
             {...props} 
         >
             {props.children}
@@ -140,7 +140,7 @@ const components = {
         </pre>
     ),
     table: (props: ComponentPropsWithoutRef<'table'>) => (
-        <div className="overflow-x-auto my-8 rounded-lg shadow-md">
+        <div className="overflow-x-auto my-4 rounded-lg shadow-md">
             <table 
                 className="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden" 
                 {...props} 
@@ -167,12 +167,12 @@ const components = {
     ),
     blockquote: (props: BlockquoteProps) => (
         <blockquote 
-            className="pl-6 py-3 my-6 border-l-4 border-blue-500 dark:border-blue-400 bg-gray-50 dark:bg-gray-800 rounded-r-lg text-gray-600 dark:text-gray-300 italic shadow-sm" 
+            className="pl-6 py-3 my-4 border-l-4 border-blue-500 dark:border-blue-400 bg-gray-50 dark:bg-gray-800 rounded-r-lg text-gray-600 dark:text-gray-300 italic shadow-sm" 
             {...props} 
         />
     ),
     hr: () => (
-        <hr className="my-8 border-t-2 border-gray-200 dark:border-gray-700" />
+        <hr className="my-4 border-t-2 border-gray-200 dark:border-gray-700" />
     ),
     
     // Blog-specific components
@@ -185,38 +185,15 @@ const components = {
         };
         
         return (
-            <div className={`border-l-4 p-4 my-6 rounded-r-lg shadow-sm ${styles[type]}`}>
+            <div className={`border-l-4 p-4 my-4 rounded-r-lg shadow-sm ${styles[type]}`}>
                 {children}
             </div>
         );
     },
     
-    CodeDemo: ({ code, demo }: { code: React.ReactNode; demo: React.ReactNode }) => (
-        <div className="my-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md">
-            <div className="p-4 bg-white dark:bg-gray-800">
-                {demo}
-            </div>
-            <div className="border-t border-gray-200 dark:border-gray-700">
-                {code}
-            </div>
-        </div>
-    ),
-    
-    VideoEmbed: ({ src, title }: { src: string; title?: string }) => (
-        <div className="my-8 overflow-hidden rounded-lg shadow-md aspect-video">
-            <iframe
-                src={src}
-                title={title || 'Embedded video'}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-            ></iframe>
-        </div>
-    ),
-    
     TOC: ({ items }: { items: { title: string; href: string; level: number }[] }) => (
-        <div className="bg-gray-50 dark:bg-gray-800 p-4 my-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h4 className="text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">Table of Contents</h4>
+        <div className="bg-gray-50 dark:bg-gray-800 p-3 my-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <h4 className="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Table of Contents</h4>
             <ul className="space-y-1">
                 {items.map((item, index) => (
                     <li 
