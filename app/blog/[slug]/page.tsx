@@ -19,17 +19,10 @@ interface BlogPost {
   tags: string[];
 }
 
-interface Props {
-  params: { 
-    slug: string 
-  }
-  searchParams?: {
-    [key: string]: string | string[] | undefined
-  }
-}
+// Removed the Props interface completely
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = (await getBlogPosts()).find(post => post.slug === params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = (await getBlogPosts()).find(p => p.slug === params.slug);
   
   if (!post) {
     return {
@@ -79,9 +72,9 @@ async function getPostContent(slug: string): Promise<string> {
   }
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const posts = await getBlogPosts();
-  const post = posts.find(post => post.slug === params.slug);
+  const post = posts.find(p => p.slug === params.slug);
   
   if (!post) {
     notFound();
