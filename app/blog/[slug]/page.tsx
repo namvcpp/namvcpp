@@ -19,10 +19,14 @@ interface BlogPost {
   tags: string[];
 }
 
-type Props = {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
+interface Props {
+  params: { 
+    slug: string 
+  }
+  searchParams?: {
+    [key: string]: string | string[] | undefined
+  }
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = (await getBlogPosts()).find(post => post.slug === params.slug);
