@@ -66,61 +66,8 @@ async function getPostContent(slug: string): Promise<string> {
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const posts = await getBlogPosts();
-  const post = posts.find(p => p.slug === params.slug);
-  const content = await getPostContent(params.slug);
-  
-  if (!post) {
-    notFound();
-  }
-  
+export default function BlogPage({ params: { slug } }: { params: { slug: string } }) {
   return (
-    <main className="container mx-auto px-4 py-12">
-      <div className="max-w-3xl mx-auto">
-        <Link 
-          href="/blog" 
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-8"
-        >
-          <ArrowLeft size={16} className="mr-2" /> Back to all posts
-        </Link>
-        
-        <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-        
-        <div className="mb-6">
-          <div className="flex flex-wrap gap-2 mb-4">
-            {post.tags.map(tag => (
-              <span 
-                key={tag}
-                className="px-2 py-1 text-xs rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-2">
-            {post.title}
-          </h1>
-          
-          <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-sm mb-8">
-            <span>{post.date}</span>
-            <span>{post.readTime}</span>
-          </div>
-        </div>
-        
-        <article className="prose dark:prose-invert max-w-none">
-          <div>{content}</div>
-        </article>
-      </div>
-    </main>
+    <div>Post slug: {slug}</div>
   );
 }
