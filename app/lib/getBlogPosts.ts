@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 export interface BlogPost {
   slug: string;
   title: string;
+  author: string;
   excerpt: string;
   date: string;
   image: string;
@@ -14,7 +15,7 @@ export interface BlogPost {
 }
 
 const wordsPerMinute = 200;
-const postsDirectory = path.join(process.cwd(), 'blog');
+const postsDirectory = path.join(process.cwd(), 'app/blog');
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
@@ -42,6 +43,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
           return {
             slug,
             title: data.title || 'Untitled Post',
+            author: data.author || 'Unknown Author',
             excerpt: data.excerpt || content.substring(0, 150) + '...',
             date: data.date ? new Date(data.date).toLocaleDateString('en-US', {
               year: 'numeric',

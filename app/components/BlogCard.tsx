@@ -6,14 +6,18 @@ interface BlogCardProps {
     title: string;
     description: string;
     link: string;
+    tags: string[];
+    image: string;
+    date: string;
+    author: string;
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link }) => {
+export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, tags, image, date, author}) => {
     return (
         <div className="blog-card group relative overflow-hidden rounded-lg shadow-lg">
             <div className="blog-card-image-container relative">
             <img
-                src="https://via.placeholder.com/300"
+                src={image}
                 alt={title}
                 className="blog-card-image w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
             />
@@ -23,15 +27,20 @@ export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link }) 
             </div>
             <div className="blog-card-content p-4">
             <h2 className="blog-card-title text-lg font-bold mb-2">{title}</h2>
-            <p className="blog-card-date text-sm text-gray-500 mb-2">Written on: Jan 1, 2023</p>
+            <p className="blog-card-date text-sm text-gray-500 mb-2">Written on: {date}</p>
             <p className="blog-card-description text-gray-700 mb-4">{description}</p>
             <div className="blog-card-icons flex items-center space-x-2 mb-4">
-                <img
-                src="https://via.placeholder.com/24"
-                alt="Author Icon"
-                className="w-6 h-6 rounded-full"
-                />
-                <span className="text-sm text-gray-600">Author Name</span>
+                <span className="text-sm text-gray-600">{author}</span>
+            </div>
+            <div className="flex flex-wrap gap-2 mb-4">
+                {tags.map(tag => (
+                    <span 
+                        key={tag}
+                        className="px-2 py-1 text-xs rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+                    >
+                        {tag}
+                    </span>
+                ))}
             </div>
             <a
                 href={link}

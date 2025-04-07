@@ -6,9 +6,6 @@ import { FaGithub, FaLinkedinIn, FaArrowRight } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// Import your core components
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import AnimatedCard from './components/AnimatedCard';
 import AwardItem from './components/AwardItem';
 
@@ -54,7 +51,7 @@ export default function Home() {
         </div>
         <div className="rounded-2xl overflow-hidden shadow-xl">
           <img 
-            src="/images/profile.jpg" // Replace with your image
+            src="/bocchi_no_no.gif" // Replace with your image
             alt="Nam Van" 
             className="w-full h-auto object-cover" 
           />

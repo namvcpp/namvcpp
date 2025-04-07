@@ -17,9 +17,9 @@ interface BlogPost {
   readTime: string;
   image: string;
   tags: string[];
+  author: string;
+  authorIcon: string;
 }
-
-// Removed the Props interface completely
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = (await getBlogPosts()).find(p => p.slug === params.slug);
@@ -42,12 +42,6 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
   }));
-}
-
-// Fetch a single blog post by slug
-async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const posts = await getBlogPosts();
-  return posts.find((post) => post.slug === slug) || null;
 }
 
 // Get blog post content
@@ -75,6 +69,7 @@ async function getPostContent(slug: string): Promise<string> {
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const posts = await getBlogPosts();
   const post = posts.find(p => p.slug === params.slug);
+  const content = await getPostContent(params.slug);
   
   if (!post) {
     notFound();
@@ -122,10 +117,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
         </div>
         
-        {/* This would be replaced with your actual blog content rendering */}
         <article className="prose dark:prose-invert max-w-none">
-          {/* Your blog content will be rendered here */}
-          <p>Your blog post content would appear here. You'll need to implement the MDX or markdown rendering.</p>
+          <div>{content}</div>
         </article>
       </div>
     </main>
