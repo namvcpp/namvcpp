@@ -6,6 +6,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   author: string;
+  authorIcon: string;
   excerpt: string;
   date: string;
   image: string;
@@ -44,6 +45,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
             slug,
             title: data.title || 'Untitled Post',
             author: data.author || 'Unknown Author',
+            authorIcon: data.authorIcon || '/images/authors/default.jpg',
             excerpt: data.excerpt || content.substring(0, 150) + '...',
             date: data.date ? new Date(data.date).toLocaleDateString('en-US', {
               year: 'numeric',
