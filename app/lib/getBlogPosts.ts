@@ -8,15 +8,17 @@ export interface BlogPost {
   author: string;
   authorIcon: string;
   excerpt: string;
-  date: string;
+  rawDate: string; // ISO for sorting
+  formattedDate: string; // localized display
   image: string;
   readTime: string;
   tags: string[];
-  content?: string; // Add content field for full blog post
+  content?: string;
 }
 
 const wordsPerMinute = 200;
-const postsDirectory = path.join(process.cwd(), 'app/blog');
+// Posts now live in content/blog to avoid mixing with route files
+const postsDirectory = path.join(process.cwd(), 'content/blog');
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
@@ -41,29 +43,28 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
           const wordCount = content.split(/\s+/g).length;
           const readTime = Math.ceil(wordCount / wordsPerMinute);
         
+          const rawDate: string = data.date || new Date().toISOString();
+          const formattedDate = new Date(rawDate).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric'
+          });
           return {
             slug,
             title: data.title || 'Untitled Post',
             author: data.author || 'Unknown Author',
             authorIcon: data.authorIcon || '/images/authors/default.jpg',
             excerpt: data.excerpt || content.substring(0, 150) + '...',
-            date: data.date ? new Date(data.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            }) : 'No date',
+            rawDate,
+            formattedDate,
             image: data.image || '/images/blog/default.jpg',
             readTime: `${readTime} min read`,
             tags: data.tags || [],
-            content: content, // Include full content
+            content,
           };
         })
     );
     
     // Sort by date (newest first)
-    return blogPosts.sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
+  return blogPosts.sort((a, b) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime());
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     return [];

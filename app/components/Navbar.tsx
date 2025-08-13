@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   return (
@@ -13,19 +14,12 @@ const Navbar = () => {
       >
         Nam Van
       </Link>
-      <div className="space-x-4">
-        <Link href="/about" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-        About
-        </Link>
-        <Link href="/project" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-        Project
-        </Link>
-        <Link href="/blog" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-        Blog
-        </Link>
-        <Link href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-        Contact
-        </Link>
+      <div className="flex items-center gap-4">
+        <Link href="/about" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">About</Link>
+        <Link href="/projects" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Projects</Link>
+        <Link href="/blog" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Blog</Link>
+        <Link href="/contact" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Contact</Link>
+        <ThemeToggle />
       </div>
       </div>
     </nav>

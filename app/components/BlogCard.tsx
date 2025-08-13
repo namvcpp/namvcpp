@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 // filepath: c:/Users/Thinkpad/Documents/Code/Dev/CV prepare/my website/namvcpp/app/components/BlogCard.tsx
 
@@ -10,9 +11,10 @@ interface BlogCardProps {
     image: string;
     date: string;
     author: string;
+    readTime: string;
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, tags, image, date, author}) => {
+export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, tags, image, date, author, readTime }) => {
     return (
         <div className="blog-card group relative overflow-hidden rounded-lg shadow-lg">
             <div className="blog-card-image-container relative">
@@ -27,7 +29,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, ta
             </div>
             <div className="blog-card-content p-4">
             <h2 className="blog-card-title text-lg font-bold mb-2">{title}</h2>
-            <p className="blog-card-date text-sm text-gray-500 mb-2">Written on: {date}</p>
+            <p className="blog-card-date text-sm text-gray-500 mb-2">{date} • {readTime}</p>
             <p className="blog-card-description text-gray-700 mb-4">{description}</p>
             <div className="blog-card-icons flex items-center space-x-2 mb-4">
                 <span className="text-sm text-gray-600">{author}</span>

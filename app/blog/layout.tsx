@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-    title: "Blog | Your Name",
-    description: "Articles and thoughts on programming, tech, and more.",
+    title: "Blog | Nam Van",
+    description: "Articles and thoughts on software, IoT, AI, and learning.",
 };
 
 export default function BlogLayout({

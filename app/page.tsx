@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaGithub, FaLinkedinIn, FaArrowRight } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Image from 'next/image';
 
 import AnimatedCard from './components/AnimatedCard';
 import AwardItem from './components/AwardItem';

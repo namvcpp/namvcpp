@@ -4,8 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { FaGraduationCap, FaLaptopCode, FaServer, FaMobileAlt, FaBrain, FaAward } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import AwardItem from '../components/AwardItem';
 
 const AboutPage = () => {
@@ -28,7 +26,6 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen py-20 px-4">
-      <Navbar />
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-16">
           <motion.h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600" whileHover={{ scale: 1.02 }}>
