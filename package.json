@@ -18,13 +18,14 @@
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.7",
     "lucide-react": "^0.485.0",
+    "marked": "^12.0.2",
     "next": "15.2.1",
+    "next-mdx-remote": "^5.0.0",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
-  "marked": "^12.0.2",
     "sugar-high": "^0.9.3"
   },
   "devDependencies": {

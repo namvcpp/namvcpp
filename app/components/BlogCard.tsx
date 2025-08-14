@@ -9,18 +9,19 @@ interface BlogCardProps {
     link: string;
     tags: string[];
     image: string;
+    imageAlt?: string;
     date: string;
     author: string;
     readTime: string;
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, tags, image, date, author, readTime }) => {
+export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, tags, image, imageAlt, date, author, readTime }) => {
     return (
         <div className="blog-card group relative overflow-hidden rounded-lg shadow-lg">
             <div className="blog-card-image-container relative">
             <img
                 src={image}
-                alt={title}
+                alt={imageAlt || title}
                 className="blog-card-image w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
             />
             <div className="blog-card-overlay absolute inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">

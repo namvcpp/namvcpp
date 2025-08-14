@@ -11,6 +11,7 @@ export interface BlogPost {
   rawDate: string; // ISO for sorting
   formattedDate: string; // localized display
   image: string;
+  imageAlt?: string;
   readTime: string;
   tags: string[];
   content?: string;
@@ -56,6 +57,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
             rawDate,
             formattedDate,
             image: data.image || '/images/blog/default.jpg',
+            imageAlt: data.imageAlt || data.title || 'Blog image',
             readTime: `${readTime} min read`,
             tags: data.tags || [],
             content,

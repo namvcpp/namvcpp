@@ -23,6 +23,7 @@ async function BlogsPage() {
                         link={`/blog/${post.slug}`}
                         tags={post.tags}
                         image={post.image}
+                        imageAlt={post.imageAlt || post.title}
                         date={post.formattedDate}
                         author={post.author}
                         readTime={post.readTime}
