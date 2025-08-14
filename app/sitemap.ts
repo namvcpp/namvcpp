@@ -1,42 +1,30 @@
-import { promises as fs } from 'fs';
+import fs from 'fs';
 import path from 'path';
 
-async function getNoteSlugs(dir: string) {
+function getBlogSlugsFromContent(dir: string) {
   try {
-    const entries = await fs.readdir(dir, {
-      recursive: true,
-      withFileTypes: true,
-    });
-    return entries
-      .filter((entry) => entry.isFile() && entry.name === 'page.mdx')
-      .map((entry) => {
-        const relativePath = path.relative(
-          dir,
-          path.join(entry.parentPath, entry.name)
-        );
-        return path.dirname(relativePath);
-      })
-      .map((slug) => slug.replace(/\\/g, '/'));
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-      // Directory does not exist, return an empty array
-      return [];
-    }
-    throw error;
+    if (!fs.existsSync(dir)) return [] as string[];
+    return fs
+      .readdirSync(dir)
+      .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
+      .map((file) => file.replace(/\.(md|mdx)$/i, ''));
+  } catch {
+    return [] as string[];
   }
 }
 
 export default async function sitemap() {
-  const blogsDirectory = path.join(process.cwd(), 'app', 'blog');
-  const slugs = await getNoteSlugs(blogsDirectory);
+  const site = 'https://namvcpp.github.io';
+  const contentDir = path.join(process.cwd(), 'content', 'blog');
+  const slugs = getBlogSlugsFromContent(contentDir);
 
   const blogs = slugs.map((slug) => ({
-    url: `https://namvcpp.github.io/blog/${slug}`,
+    url: `${site}/blog/${slug}`,
     lastModified: new Date().toISOString(),
   }));
 
-  const routes = ['', '/work'].map((route) => ({
-    url: `https://namvcpp.github.io${route}`,
+  const routes = ['/', '/about', '/projects', '/contact', '/blog'].map((route) => ({
+    url: `${site}${route}`,
     lastModified: new Date().toISOString(),
   }));
 
