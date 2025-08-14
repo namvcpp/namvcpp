@@ -11,6 +11,8 @@ interface AnimatedCardProps {
   link: string;
   featured?: boolean;
   delay?: number;
+  /** Optional accent (no longer affects visuals to keep type-uniform styling). */
+  accent?: 'sky' | 'emerald' | 'violet';
 }
 
 const AnimatedCard = ({ title, description, tags, link, featured = false, delay = 0 }: AnimatedCardProps) => {
@@ -19,9 +21,7 @@ const AnimatedCard = ({ title, description, tags, link, featured = false, delay 
   return (
     <Link href={link} className="block h-full">
       <motion.div 
-        className={`h-full p-6 rounded-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 relative overflow-hidden group ${
-          featured ? 'bg-blue-50 dark:bg-blue-900/20' : 'bg-white dark:bg-gray-800'
-        }`}
+        className={`ui-card ui-card--accent h-full p-6 transition-all duration-300 relative overflow-hidden group`}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
@@ -35,18 +35,12 @@ const AnimatedCard = ({ title, description, tags, link, featured = false, delay 
       >
         <div className="relative z-10">
           <motion.h3 
-            className="text-xl font-bold mb-3 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+            className="text-xl font-semibold mb-3 text-zinc-900 dark:text-zinc-50 transition-colors"
           >
             {title}
-            <motion.span
-              className="inline-block ml-1"
-              animate={hovered ? { rotate: [0, 15, 0], transition: { repeat: 1, duration: 0.5 }} : {}}
-            >
-              {featured ? '✨' : ''}
-            </motion.span>
           </motion.h3>
           
-          <motion.p className="text-gray-600 dark:text-gray-300 mb-4">
+          <motion.p className="text-zinc-600 dark:text-zinc-300 mb-4">
             {description}
           </motion.p>
           
@@ -54,7 +48,7 @@ const AnimatedCard = ({ title, description, tags, link, featured = false, delay 
             {tags.map((tag, i) => (
               <motion.span 
                 key={i} 
-                className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full"
+                className="ui-badge"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: delay * 0.1 + 0.1 * i + 0.3 }}

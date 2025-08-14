@@ -199,6 +199,150 @@ table {
   }
 }
 
+/* Shared UI utilities */
+.ui-card {
+  position: relative;
+  border-radius: 1rem; /* ~rounded-2xl */
+  background-color: color-mix(in oklab, var(--color-white) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-zinc-200) 60%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.ui-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  .ui-card {
+    background-color: color-mix(in oklab, var(--color-zinc-900) 70%, transparent);
+    border-color: var(--color-zinc-800);
+  }
+}
+
+/* Optional accent variants */
+.ui-card--accent::after,
+.ui-card--accent-sky::after,
+.ui-card--accent-emerald::after,
+.ui-card--accent-violet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0.35;
+}
+.ui-card--accent::after {
+  background-image: linear-gradient(90deg, var(--color-sky-400), var(--color-fuchsia-400), var(--color-emerald-400));
+}
+.ui-card--accent-sky::after { background-color: var(--color-sky-400); }
+.ui-card--accent-emerald::after { background-color: var(--color-emerald-400); }
+.ui-card--accent-violet::after { background-color: var(--color-fuchsia-400); }
+@media (prefers-color-scheme: dark) {
+  .ui-card--accent::after,
+  .ui-card--accent-sky::after,
+  .ui-card--accent-emerald::after,
+  .ui-card--accent-violet::after {
+    opacity: 0.45;
+  }
+}
+
+/* Left color bar variants */
+.ui-card--leftbar-sky::before,
+.ui-card--leftbar-emerald::before,
+.ui-card--leftbar-violet::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.ui-card--leftbar-sky::before { background-color: var(--color-sky-400); opacity: 0.6; }
+.ui-card--leftbar-emerald::before { background-color: var(--color-emerald-400); opacity: 0.6; }
+.ui-card--leftbar-violet::before { background-color: var(--color-fuchsia-400); opacity: 0.6; }
+
+/* Hover shadow color variants */
+.ui-card--shadow-sky:hover { box-shadow: 0 10px 28px 0 color-mix(in oklab, var(--color-sky-400) 24%, transparent); }
+.ui-card--shadow-emerald:hover { box-shadow: 0 10px 28px 0 color-mix(in oklab, var(--color-emerald-400) 24%, transparent); }
+.ui-card--shadow-violet:hover { box-shadow: 0 10px 28px 0 color-mix(in oklab, var(--color-fuchsia-400) 24%, transparent); }
+
+/* Background tint variants */
+.ui-card--bg-sky { background-color: color-mix(in oklab, var(--color-sky-100) 18%, var(--color-white)); }
+.ui-card--bg-emerald { background-color: color-mix(in oklab, var(--color-emerald-100) 18%, var(--color-white)); }
+.ui-card--bg-violet { background-color: color-mix(in oklab, var(--color-fuchsia-100) 18%, var(--color-white)); }
+@media (prefers-color-scheme: dark) {
+  .ui-card--bg-sky { background-color: color-mix(in oklab, var(--color-sky-500) 12%, var(--color-zinc-900)); }
+  .ui-card--bg-emerald { background-color: color-mix(in oklab, var(--color-emerald-500) 12%, var(--color-zinc-900)); }
+  .ui-card--bg-violet { background-color: color-mix(in oklab, var(--color-fuchsia-500) 12%, var(--color-zinc-900)); }
+}
+
+/* Unified info variant (minimal tint + border) */
+.ui-card--info {
+  background-color: color-mix(in oklab, var(--color-sky-50) 24%, var(--color-white));
+  border-color: color-mix(in oklab, var(--color-sky-200) 50%, var(--color-zinc-200));
+}
+@media (prefers-color-scheme: dark) {
+  .ui-card--info {
+    background-color: color-mix(in oklab, var(--color-sky-500) 10%, var(--color-zinc-900));
+    border-color: color-mix(in oklab, var(--color-sky-700) 35%, var(--color-zinc-800));
+  }
+}
+
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem; /* px-2.5 py-1 */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500;
+  border-radius: 9999px; /* full */
+  border: 1px solid color-mix(in oklab, var(--color-zinc-300) 40%, transparent);
+  background-color: color-mix(in oklab, var(--color-zinc-50) 80%, transparent);
+  color: var(--color-zinc-700);
+}
+@media (prefers-color-scheme: dark) {
+  .ui-badge {
+    border-color: color-mix(in oklab, var(--color-zinc-700) 50%, transparent);
+    background-color: color-mix(in oklab, var(--color-zinc-800) 50%, transparent);
+    color: var(--color-zinc-300);
+  }
+}
+
+.ui-icon-button {
+  width: 2.25rem; /* w-9 */
+  height: 2.25rem; /* h-9 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem; /* rounded-xl-ish */
+  background-color: color-mix(in oklab, var(--color-white) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-zinc-200) 60%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--color-zinc-700);
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+}
+.ui-icon-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+}
+.ui-icon-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-sky-400) 80%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  .ui-icon-button {
+    background-color: color-mix(in oklab, var(--color-zinc-900) 70%, transparent);
+    border-color: var(--color-zinc-800);
+    color: var(--color-zinc-200);
+  }
+}
+
 /* Add these animation classes */
 @keyframes gradient {
   0% { background-position: 0% 50%; }

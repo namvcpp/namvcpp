@@ -9,6 +9,7 @@ import Image from 'next/image';
 
 import AnimatedCard from './components/AnimatedCard';
 import AwardItem from './components/AwardItem';
+import ProfileHeading from './components/ProfileHeading';
 
 export default function Home() {
   useEffect(() => {
@@ -24,12 +25,14 @@ export default function Home() {
       {/* Hero Section */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="space-y-5">
-          <h1 className="text-5xl font-bold text-gray-900 dark:text-gray-50">
-            Hi, I'm Nam Van 👋
-          </h1>
-          <p className="text-xl text-gray-800 dark:text-gray-300">
-            A high school student passionate about software development, IoT, and AI.
-            Currently focusing on innovative solutions using machine learning and web technologies.
+          <ProfileHeading
+            name="Van Cong Nam"
+            subtitle="Building things for Web, IoT, and AI — with a curious mind and a maker's spirit."
+            badges={["Web", "IoT", "AI"]}
+          />
+          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-2xl">
+            High school student passionate about software, embedded systems, and machine learning.
+            I love prototyping ideas and shipping usable tools.
           </p>
           <div className="flex space-x-4">
             <a 
@@ -72,7 +75,7 @@ export default function Home() {
             View All <FaArrowRight className="ml-2" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch auto-rows-fr">
           <AnimatedCard
             title="Landslide Detection System"
             description="Early warning system combining IoT sensors with real-time alerting for potential landslides."
@@ -90,7 +93,7 @@ export default function Home() {
       </section>
 
       {/* Awards & Recognition */}
-      <section className="mt-16">
+  <section className="mt-16">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">
             Awards & Recognition

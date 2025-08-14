@@ -10,12 +10,12 @@ interface OverviewCardProps {
 const OverviewCard: React.FC<OverviewCardProps> = ({ title, description, icon, onClick }) => {
   return (
     <div 
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 cursor-pointer hover:scale-105 transition-transform"
+      className="ui-card p-5 h-full cursor-pointer"
       onClick={onClick}
     >
-      <div className="text-4xl text-blue-500 dark:text-blue-400 mb-2">{icon}</div>
-      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">{title}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-300">{description}</p>
+      <div className="text-3xl text-zinc-700 dark:text-zinc-300 mb-2">{icon}</div>
+      <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-1">{title}</h3>
+      <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">{description}</p>
     </div>
   );
 };
