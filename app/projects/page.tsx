@@ -26,8 +26,8 @@ const Projects = () => {
 
   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 items-stretch auto-rows-fr">
     {projects.map((p) => (
-          <li key={p.title} className="group relative">
-      <div className={`ui-card h-full p-6 md:p-7`}>
+      <li key={p.title} className="group relative">
+    <div className={`ui-card ui-card--glow h-full p-6 md:p-7`}>
                 <div className="flex items-start justify-between gap-4">
                   <h2 className="text-lg md:text-xl font-semibold mb-1 text-zinc-900 dark:text-zinc-50">
                     {p.title}

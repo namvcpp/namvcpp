@@ -31,11 +31,11 @@ export default function ProfileHeading({
   return (
     <div className={`space-y-2 ${alignCls}`}>
       <h2
-        className={`${sizeMap[size]} font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-fuchsia-600 dark:from-sky-400 dark:to-fuchsia-400`}
+        className={`${sizeMap[size]} font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-fuchsia-600 dark:from-sky-400 dark:to-fuchsia-400 text-balance`}
       >
         {name}
       </h2>
-      <p className="text-zinc-600 dark:text-zinc-300">{subtitle}</p>
+      <p className="text-zinc-600 dark:text-zinc-300 text-pretty">{subtitle}</p>
       {badges.length > 0 && (
         <div className="mt-2 flex flex-wrap justify-center gap-2">
           {badges.map((b) => (

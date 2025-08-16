@@ -12,7 +12,7 @@ interface AwardItemProps {
 const AwardItem = ({ award, year, description }: AwardItemProps) => {
   return (
     <motion.div
-  className={`ui-card ui-card--accent p-5 relative overflow-hidden group`}
+      className={`ui-card ui-card--glow p-5 relative overflow-hidden group`}
       whileHover={{ y: -2, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
       transition={{ duration: 0.2 }}
     >

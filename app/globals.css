@@ -32,6 +32,10 @@ h4 {
   text-wrap: balance;
 }
 
+/* Utilities to improve line wrapping and avoid orphans */
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
 pre {
   background-color: #16161e;
   border-radius: 0.5rem;
@@ -397,6 +401,35 @@ table {
   background-image: radial-gradient(#3b82f6 0.5px, transparent 0.5px);
   background-size: 15px 15px;
   opacity: 0.2;
+}
+
+/* Neutral glow variant (non-color styling) */
+.ui-card--glow {
+  position: relative;
+}
+.ui-card--glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(140px 90px at 50% -20%, rgba(255, 255, 255, 0.7), transparent 60%);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.ui-card--glow:hover::before {
+  opacity: 1;
+}
+.ui-card--glow:hover {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+  .ui-card--glow::before {
+    background: radial-gradient(160px 100px at 50% -20%, rgba(255, 255, 255, 0.08), transparent 60%);
+  }
+  .ui-card--glow:hover {
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+  }
 }
 
 /* Add to your CSS */

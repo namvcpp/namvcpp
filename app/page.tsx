@@ -27,10 +27,10 @@ export default function Home() {
         <div className="space-y-5">
           <ProfileHeading
             name="Van Cong Nam"
-            subtitle="Building things for Web, IoT, and AI — with a curious mind and a maker's spirit."
+            subtitle={"Building things for Web, IoT, and AI — with a curious mind and a maker\u2019s\u00A0spirit."}
             badges={["Web", "IoT", "AI"]}
           />
-          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-2xl">
+          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-2xl text-pretty">
             High school student passionate about software, embedded systems, and machine learning.
             I love prototyping ideas and shipping usable tools.
           </p>
@@ -40,6 +40,7 @@ export default function Home() {
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+              aria-label="GitHub profile"
             >
               <FaGithub size={32} />
             </a>
@@ -48,16 +49,21 @@ export default function Home() {
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+              aria-label="LinkedIn profile"
             >
               <FaLinkedinIn size={32} />
             </a>
           </div>
         </div>
         <div className="rounded-2xl overflow-hidden shadow-xl">
-          <img 
-            src="/bocchi_no_no.gif" // Replace with your image
-            alt="Nam Van" 
-            className="w-full h-auto object-cover" 
+          <Image
+            src="/bocchi_no_no.gif"
+            alt="Animated illustration"
+            width={960}
+            height={720}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="w-full h-auto object-cover"
+            priority
           />
         </div>
       </section>

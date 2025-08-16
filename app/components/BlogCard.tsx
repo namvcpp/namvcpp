@@ -17,7 +17,7 @@ interface BlogCardProps {
 
 export const BlogCard: React.FC<BlogCardProps> = ({ title, description, link, tags, image, imageAlt, date, author, readTime }) => {
     return (
-    <div className="blog-card group relative overflow-hidden ui-card h-full">
+    <div className="blog-card group relative overflow-hidden ui-card ui-card--glow h-full">
             <div className="blog-card-image-container relative">
             <img
                 src={image}
