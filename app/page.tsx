@@ -113,17 +113,17 @@ export default function Home() {
         </div>
         <div className="space-y-6">
           <AwardItem 
-            award="1st Prize - U-Invent Vietnam Season 7"
+            award="2nd Prize — Google Developer Student Club Hackathon"
+            year="2025"
+            description="Nationwide hackathon organized by GDSC"
+          />
+          <AwardItem 
+            award="1st Prize — U-Invent Vietnam Season 7"
             year="2024"
             description="National innovation competition for students"
           />
           <AwardItem 
-            award="2nd Prize - Google Developer Student Club Hackathon"
-            year="2024"
-            description="Nationwide hackathon organized by GDSC"
-          />
-          <AwardItem 
-            award="1st Prize - Youth On! Hackathon"
+            award="1st Prize — Youth On! Hackathon"
             year="2023"
             description="Regional hackathon for innovative solutions"
           />

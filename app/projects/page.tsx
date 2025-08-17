@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 
 const Projects = () => {
   const projects = [
-    { title: 'Landslide Detection System', description: 'IoT early warning system with real-time sensor fusion and alerting.', stack: ['IoT', 'ESP32', 'Firebase', 'React'] },
-    { title: 'Elderly HealthCare', description: 'Computer vision fall detection to notify caregivers instantly.', stack: ['Python', 'OpenCV', 'TensorFlow'] }
+    { title: 'Landslide Detection System', href: '/projects/landslide-detection', description: 'IoT early warning system with real-time sensor fusion and alerting.', stack: ['IoT', 'ESP32', 'Firebase', 'React'] },
+    { title: 'Elderly HealthCare', href: '/projects/elderly-healthcare', description: 'Computer vision fall detection to notify caregivers instantly.', stack: ['Python', 'OpenCV', 'TensorFlow'] }
   ];
 
   const tagStyles: Record<string, string> = {
@@ -27,6 +28,7 @@ const Projects = () => {
   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 items-stretch auto-rows-fr">
     {projects.map((p) => (
       <li key={p.title} className="group relative">
+        <Link href={p.href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
     <div className={`ui-card ui-card--glow h-full p-6 md:p-7`}>
                 <div className="flex items-start justify-between gap-4">
                   <h2 className="text-lg md:text-xl font-semibold mb-1 text-zinc-900 dark:text-zinc-50">
@@ -45,6 +47,7 @@ const Projects = () => {
                   ))}
                 </div>
             </div>
+        </Link>
           </li>
         ))}
       </ul>

@@ -1,0 +1,553 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Cong Nam's CV},
+    pdfauthor={Van Cong Nam},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\textit{\small Van Cong Nam - Page \thepage{} of \pageref*{LastPage}}
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+    \small\color{gray}\textit{Last updated in August 2025}\hspace{\widthof{Last updated in August 2025}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+    \placelastupdatedtext
+    \begin{header}
+        \textbf{\fontsize{24 pt}{24 pt}\selectfont Van Cong Nam}
+
+        \vspace{0.3 cm}
+
+        \normalsize
+        \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Da Nang, Viet Nam}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{mailto:namvc153@gmail.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}namvc153@gmail.com}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{tel:+84-916-142-877}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}0916 142 877}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://namvcpp.github.io/}{\color{black}{\footnotesize\faLink}\hspace*{0.13cm}namvcpp.github.io}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/nam-van-b33752347/}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}Nam Van}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://github.com/namvcpp}{\color{black}{\footnotesize\faGithub}\hspace*{0.13cm}namvcpp}}%
+    \end{header}
+
+    \vspace{0.3 cm - 0.3 cm}
+
+    % Summary
+    \section{Summary}
+        \begin{onecolentry}
+            Student developer focused on building useful products across \textbf{Web}, \textbf{IoT}, and \textbf{AI}. Awarded at national and regional hackathons; experienced with embedded systems (ESP32/Arduino), modern web stacks (Next.js/React/TypeScript), and computer vision (OpenCV/TensorFlow/MediaPipe). Strong bias for prototyping and shipping.
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+
+
+        
+    %     \begin{onecolentry}
+    %         \href{https://rendercv.com}{RenderCV} is a LaTeX-based CV/resume version-control and maintenance app. It allows you to create a high-quality CV or resume as a PDF file from a YAML file, with \textbf{Markdown syntax support} and \textbf{complete control over the LaTeX code}.
+    %     \end{onecolentry}
+
+    %     \vspace{0.2 cm}
+
+    %     \begin{onecolentry}
+    %         The boilerplate content was inspired by \href{https://github.com/dnl-blkv/mcdowell-cv}{Gayle McDowell}.
+    %     \end{onecolentry}
+
+
+    
+    % \section{Quick Guide}
+
+    % \begin{onecolentry}
+    %     \begin{highlightsforbulletentries}
+
+
+    %     \item Each section title is arbitrary and each section contains a list of entries.
+
+    %     \item There are 7 unique entry types: \textit{BulletEntry}, \textit{TextEntry}, \textit{EducationEntry}, \textit{ExperienceEntry}, \textit{NormalEntry}, \textit{PublicationEntry}, and \textit{OneLineEntry}.
+
+    %     \item Select a section title, pick an entry type, and start writing your section!
+
+    %     \item \href{https://docs.rendercv.com/user_guide/}{Here}, you can find a comprehensive user guide for RenderCV.
+
+
+    %     \end{highlightsforbulletentries}
+    % \end{onecolentry}
+
+    \section{Education}
+
+
+
+        
+        \begin{twocolentry}{
+            
+            
+        \textit{Sept 2023 – Now}}
+            \textbf{Le Quy Don High School for the Gifted, Da Nang, Viet Nam}
+
+            % \textit{BS in Computer Science}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                % \item GPA: 3.7/4.0 (\href{https://example.com}{a link to somewhere})
+                \item GPA: 3.7
+                \item \textbf{Specialization:} Informatics \& Mathematics
+            \end{highlights}
+        \end{onecolentry}
+
+
+
+    
+    % \section{Experience}
+
+
+
+        
+    %     \begin{twocolentry}{
+    %     \textit{Cupertino, CA}    
+            
+    %     \textit{June 2005 – Aug 2007}}
+    %         \textbf{Software Engineer}
+            
+    %         \textit{Apple}
+    %     \end{twocolentry}
+
+    %     \vspace{0.10 cm}
+    %     \begin{onecolentry}
+    %         \begin{highlights}
+    %             \item Reduced time to render user buddy lists by 75\% by implementing a prediction algorithm
+    %             \item Integrated iChat with Spotlight Search by creating a tool to extract metadata from saved chat transcripts and provide metadata to a system-wide search database
+    %             \item Redesigned chat file format and implemented backward compatibility for search
+    %         \end{highlights}
+    %     \end{onecolentry}
+
+
+    %     \vspace{0.2 cm}
+
+    %     \begin{twocolentry}{
+    %     \textit{Redmond, WA}    
+            
+    %     \textit{June 2003 – Aug 2003}}
+    %         \textbf{Software Engineer Intern}
+            
+    %         \textit{Microsoft}
+    %     \end{twocolentry}
+
+    %     \vspace{0.10 cm}
+    %     \begin{onecolentry}
+    %         \begin{highlights}
+    %             \item Designed a UI for the VS open file switcher (Ctrl-Tab) and extended it to tool windows
+    %             \item Created a service to provide gradient across VS and VS add-ins, optimizing its performance via caching
+    %             \item Built an app to compute the similarity of all methods in a codebase, reducing the time from $\mathcal{O}(n^2)$ to $\mathcal{O}(n \log n)$
+    %             \item Created a test case generation tool that creates random XML docs from XML Schema
+    %             \item Automated the extraction and processing of large datasets from legacy systems using SQL and Perl scripts
+    %         \end{highlights}
+    %     \end{onecolentry}
+
+
+
+    
+    % \section{Publications}
+
+
+
+        
+    %     \begin{samepage}
+    %         \begin{twocolentry}{
+    %             Jan 2004
+    %         }
+    %             \textbf{3D Finite Element Analysis of No-Insulation Coils}
+
+    %             \vspace{0.10 cm}
+
+    %             \mbox{Frodo Baggins}, \mbox{\textbf{\textit{John Doe}}}, \mbox{Samwise Gamgee}
+    %         \end{twocolentry}
+
+
+    %         \vspace{0.10 cm}
+
+    %         \begin{onecolentry}
+    %     \href{https://doi.org/10.1109/TASC.2023.3340648}{10.1109/TASC.2023.3340648}
+    %         \end{onecolentry}
+    %     \end{samepage}
+
+
+    
+    \section{Projects}
+
+        \begin{twocolentry}{(2025)}
+            	extbf{Elderly HealthCare — Fall Detection System}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Designed an IoT + computer vision system to detect human falls and alert caregivers in real time.
+                \item Trained and optimized models (YOLO/MediaPipe/DeepFace) for robust recognition; implemented alerting via mobile interface.
+                \item \textbf{Tech:} Python, Arduino, ESP32, OpenCV, TensorFlow, YOLO, DeepFace, MediaPipe.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2024)}
+            	extbf{Landslide Detection \& Early Warning System}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Developed a sensor fusion platform with ESP32 and environmental sensors to monitor terrain conditions.
+                \item Built a web dashboard for real-time data visualization and automated warning notifications.
+                \item \textbf{Tech:} TypeScript, Next.js, React, Firebase, Python, Arduino, ESP32.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+    \section{Awards}
+
+        \begin{twocolentry}{(2025)}
+            	extbf{2nd Prize — Google Developer Student Club Hackathon}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Nationwide hackathon organized by GDSC; recognized for engineering and impact.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2024)}
+            	extbf{1st Prize — U-Invent Vietnam Season 7}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item National innovation competition for students.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2023)}
+            	extbf{1st Prize — Youth On! Hackathon}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Regional hackathon for innovative solutions.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2023)}
+            	extbf{Bebras High Distinction (Gold Medal)}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item International computational thinking challenge; highest distinction.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2023)}
+            	extbf{Bronze Medal — American Math Olympiad}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item International competition; strength in algebra, number theory, geometry.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2023)}
+            	extbf{Bronze Medal — Olympic Tin học Miền Trung \& Tây Nguyên mùa IV}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Regional CS/programming competition for Central \& Highlands Vietnam.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2023)}
+            	extbf{1st Prize — Provincial Informatics Competition}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item City-level programming competition, Da Nang.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}{(2023)}
+            	extbf{2nd Prize — Provincial Mathematics Competition}
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Da Nang provincial competition.
+            \end{highlights}
+        \end{onecolentry}
+
+\vspace{0.2 cm}
+
+\section{Certifications}
+
+    \begin{twocolentry}{(2025)}
+        \textbf{IELTS - Academic (Computer-Based)}
+    \end{twocolentry}
+
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Achieved a band 7.0 score.
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.2 cm}
+
+    
+
+\vspace{0.2 cm}
+
+\section{Leadership Experience}
+
+    \begin{twocolentry}{(2025)}
+    \textbf{Technical Leader - U-Invent Vietnam Season 7}
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Led the technical development team of a landslide detection and warning system, integrating IoT hardware and a web-based alert platform.
+            \item Designed and implemented core algorithms for sensor data processing and real-time risk assessment.
+            \item Managed a cross-functional team, coordinating tasks across hardware, software, and research domains.
+            \item Tools Used: IoT (ESP32, Arduino, geotechnical sensors), Python, Next.js, React, Typescript, Firebase.
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}{(2024)}
+        \textbf{Project Lead - Linguist Reader Development}
+    \end{twocolentry}
+
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Led the development of a feature-rich eBook reader with AI-powered translation, annotation, and progress tracking.
+            \item Worked in a 2-member team, handled both backend and frontend.
+        \end{highlights}
+    \end{onecolentry}
+
+\vspace{0.2 cm}
+
+\section{Volunteer Experience}
+
+    \begin{twocolentry}{(2023)}
+    \textbf{Volunteer - Charity Trip to Quang Nam}
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Participated in a charity initiative, providing essential supplies and support to underprivileged communities in Quang Nam.
+        \item Engaged with local residents, helping distribute donations and assisting in community activities.
+        \item Contributed to fundraising efforts, ensuring sustainable aid for those in need.
+    \end{highlights}
+\end{onecolentry}
+    
+    
+    
+    \section{Technologies}
+        
+        \begin{onecolentry}
+            	extbf{Languages:} C++, Python, GDScript, TypeScript, JavaScript, HTML, CSS
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{onecolentry}
+            	extbf{Technologies:} Git, Next.js, React, Firebase, ESP32, Arduino, OpenCV, TensorFlow, MediaPipe, YOLO, DeepFace, Godot, Pygame, Tkinter
+        \end{onecolentry}
+
+
+    
+
+\end{document}

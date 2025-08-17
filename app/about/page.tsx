@@ -15,14 +15,33 @@ const AboutPage = () => {
     { name: 'Machine Learning', icon: <FaBrain className="w-6 h-6" /> },
   ];
 
-  const achievements = [
-    { year: '2023', title: 'First Place - Regional Hackathon', description: 'Led a team to develop an innovative EdTech solution that won first place.' },
-    { year: '2022', title: 'Published Research Paper', description: 'Co-authored research on AI applications in educational environments.' },
-    { year: '2022', title: 'Open Source Contributor', description: 'Active contributor to several open-source projects with over 50 merged PRs.' }
+  // Awards per CV
+  const awards = [
+    { year: '2025', title: '2nd Prize — Google Developer Student Club Hackathon', description: 'Nationwide hackathon organized by GDSC; recognized for engineering and impact.' },
+    { year: '2024', title: '1st Prize — U-Invent Vietnam Season 7', description: 'National innovation competition for students.' },
+    { year: '2023', title: '1st Prize — Youth On! Hackathon', description: 'Regional hackathon for innovative solutions.' },
+    { year: '2023', title: 'Bebras High Distinction (Gold Medal)', description: 'International computational thinking challenge; highest distinction.' },
+    { year: '2023', title: 'Bronze Medal — American Math Olympiad', description: 'International mathematics competition.' },
+    { year: '2023', title: 'Bronze Medal — Olympic Tin học Miền Trung & Tây Nguyên mùa IV', description: 'Regional CS/programming competition for Central & Highlands Vietnam.' },
+    { year: '2023', title: '1st Prize — Provincial Informatics Competition', description: 'City-level programming competition, Da Nang.' },
+    { year: '2023', title: '2nd Prize — Provincial Mathematics Competition', description: 'Da Nang provincial competition.' },
   ];
 
   const education = [
-    { year: '2020 - Present', institution: 'Le Quy Don High School for the Gifted', details: 'Specialized in Informatics & Mathematics' }
+    { year: '2023 – Present', institution: 'Le Quy Don High School for the Gifted, Da Nang, Viet Nam', details: 'Specialization: Informatics & Mathematics · GPA: 3.7' }
+  ];
+
+  const certifications = [
+    { year: '2025', name: 'IELTS — Academic (Computer-Based)', details: 'Band 7.0' },
+  ];
+
+  const leadership = [
+    { year: '2025', role: 'Technical Leader — U-Invent Vietnam Season 7', details: 'Led technical development for landslide detection & alerting (IoT + web platform). Coordinated hardware, software, and research.' },
+    { year: '2024', role: 'Project Lead — Linguist Reader Development', details: 'Built an eBook reader with AI translation, annotation, and progress tracking in a small team.' },
+  ];
+
+  const volunteer = [
+    { year: '2023', role: 'Volunteer — Charity Trip to Quang Nam', details: 'Delivered supplies, supported local activities, and contributed to fundraising.' },
   ];
 
   return (
@@ -63,7 +82,16 @@ const AboutPage = () => {
             </div>
           </div>
 
-          {/* Quick facts removed per request */}
+          {/* Awards */}
+        </div>
+
+        <motion.h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.5 }}>
+          Awards
+        </motion.h2>
+        <div className="space-y-6 mb-16">
+          {awards.map((a) => (
+            <AwardItem key={`${a.title}-${a.year}`} award={a.title} year={a.year} description={a.description} />
+          ))}
         </div>
 
         <motion.h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }}>
@@ -98,14 +126,52 @@ const AboutPage = () => {
           </div>
           <div>
             <motion.h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 flex items-center" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5, duration: 0.5 }}>
-              <FaAward className="mr-3 text-purple-500" /> Achievements
+              <FaAward className="mr-3 text-purple-500" /> Certifications
             </motion.h2>
-            <div className="space-y-6">
-              {achievements.map((item) => (
-                <AwardItem key={item.title} award={item.title} year={item.year} description={item.description} />
+            <div className="space-y-4">
+              {certifications.map((c) => (
+                <div key={c.name} className="ui-card p-5">
+                  <div className="flex items-start justify-between">
+                    <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{c.name}</h3>
+                    <span className="text-sm text-zinc-600 dark:text-zinc-400">{c.year}</span>
+                  </div>
+                  <p className="text-zinc-600 dark:text-zinc-400">{c.details}</p>
+                </div>
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Leadership */}
+        <motion.h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.5 }}>
+          Leadership Experience
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {leadership.map((l) => (
+            <div key={l.role} className="ui-card p-5">
+              <div className="flex items-start justify-between">
+                <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{l.role}</h3>
+                <span className="text-sm text-zinc-600 dark:text-zinc-400">{l.year}</span>
+              </div>
+              <p className="text-zinc-600 dark:text-zinc-400">{l.details}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Volunteer */}
+        <motion.h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.5 }}>
+          Volunteer Experience
+        </motion.h2>
+        <div className="space-y-4 mb-12">
+          {volunteer.map((v) => (
+            <div key={v.role} className="ui-card p-5">
+              <div className="flex items-start justify-between">
+                <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{v.role}</h3>
+                <span className="text-sm text-zinc-600 dark:text-zinc-400">{v.year}</span>
+              </div>
+              <p className="text-zinc-600 dark:text-zinc-400">{v.details}</p>
+            </div>
+          ))}
         </div>
 
         <div className="text-center">
