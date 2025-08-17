@@ -30,6 +30,7 @@ export default async function sitemap() {
     '/contact',
     '/blog',
     '/awards',
+  '/interests',
     '/projects/elderly-healthcare',
     '/projects/landslide-detection',
   ].map((route) => ({

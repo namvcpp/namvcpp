@@ -18,6 +18,7 @@ const Navbar = () => {
         <Link href="/about" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">About</Link>
         <Link href="/projects" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Projects</Link>
   <Link href="/awards" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Awards</Link>
+  <Link href="/interests" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Interests</Link>
         <Link href="/blog" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Blog</Link>
         <Link href="/contact" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Contact</Link>
         <ThemeToggle />
