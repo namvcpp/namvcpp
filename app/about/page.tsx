@@ -26,6 +26,7 @@ const AboutPage = () => {
     { year: '2023', title: '1st Prize — Provincial Informatics Competition', description: 'City-level programming competition, Da Nang.' },
     { year: '2023', title: '2nd Prize — Provincial Mathematics Competition', description: 'Da Nang provincial competition.' },
   ];
+  const awardsPreview = awards.slice(0, 3);
 
   const education = [
     { year: '2023 – Present', institution: 'Le Quy Don High School for the Gifted, Da Nang, Viet Nam', details: 'Specialization: Informatics & Mathematics · GPA: 3.7' }
@@ -88,10 +89,23 @@ const AboutPage = () => {
         <motion.h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.5 }}>
           Awards
         </motion.h2>
-        <div className="space-y-6 mb-16">
-          {awards.map((a) => (
+        <div className="space-y-6 mb-6">
+          {awardsPreview.map((a) => (
             <AwardItem key={`${a.title}-${a.year}`} award={a.title} year={a.year} description={a.description} />
           ))}
+        </div>
+        <div className="mb-16 flex justify-center">
+          <Link
+            href="/awards"
+            className="inline-flex items-center gap-2 text-sky-600 dark:text-sky-400 hover:text-sky-500 dark:hover:text-sky-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+            aria-label="See more awards"
+          >
+            See more
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+              <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l6 6a.75.75 0 0 1 0 1.06l-6 6a.75.75 0 1 1-1.06-1.06L17.69 12l-4.72-4.72a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+              <path fillRule="evenodd" d="M4.5 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12A.75.75 0 0 1 4.5 12Z" clipRule="evenodd" />
+            </svg>
+          </Link>
         </div>
 
         <motion.h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }}>
